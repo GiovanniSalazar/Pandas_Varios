@@ -75,3 +75,23 @@ df = pd.read_csv(StringIO(data), sep=',')
 for x, y in df.groupby('C'):
     print(y)
 ```
+
+* Comparar valores de columnas usando pandas y numpy
+
+```sh
+import numpy as np
+import pandas as pd
+from io import StringIO
+
+data = """
+Col1,Adj,MA3
+A,1,2
+B,8,5
+C,7,7
+"""
+
+df = pd.read_csv(StringIO(data),sep=',')
+# > <  =
+df['Adj Close > MA3'] =np.where(df['Adj']>df['MA3'],'1', np.where(df['Adj']<df['MA3'],'0', 'equals'))
+print(df)
+```
