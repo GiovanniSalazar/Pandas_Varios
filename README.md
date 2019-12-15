@@ -54,3 +54,24 @@ PDB,CHAIN,SP_PRIMARY
 df = pd.read_csv(StringIO(data), sep=',')
 print(df)
 ```
+
+* Dividir un dataframe dependiendo del valor de una columna
+
+```sh
+import pandas as pd
+from io import StringIO
+
+data = """
+A,B,C
+5d8a,N,1
+5d8b,A,1
+5d8c,B,2
+5d8b,C,2
+5d8f,Y,3
+5d8b,X,3
+"""
+
+df = pd.read_csv(StringIO(data), sep=',')
+for x, y in df.groupby('C'):
+    print(y)
+```
