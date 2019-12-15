@@ -95,3 +95,12 @@ df = pd.read_csv(StringIO(data),sep=',')
 df['Adj Close > MA3'] =np.where(df['Adj']>df['MA3'],'1', np.where(df['Adj']<df['MA3'],'0', 'equals'))
 print(df)
 ```
+* Dividir una columnas en base a un caracter 
+
+```sh
+import pandas as pd
+from pandas import Series
+import numpy as np
+dfm = pd.DataFrame({'id': np.arange(5), 'words': ['apple;pear;orange', 'apple', 'pear;grape', 'orange', 'orange;pear']})
+print(dfm.words.str.split(';').explode().value_counts())
+```
