@@ -38,3 +38,19 @@ import pandas as pd
 df=pd.read_csv('vgsales.csv',delimiter=',',usecols=["Genre", "Global_Sales"])
 print(df.groupby(['Genre']).sum())
 ```
+* Crear csv partiendo desde un string
+
+```sh
+import pandas as pd
+from io import StringIO
+
+data = """
+PDB,CHAIN,SP_PRIMARY
+5d8b,N,P60490
+5d8b,,P80377
+5d8b,O,P60491
+"""
+
+df = pd.read_csv(StringIO(data), sep=',')
+print(df)
+```
