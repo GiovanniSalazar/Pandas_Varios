@@ -104,3 +104,29 @@ import numpy as np
 dfm = pd.DataFrame({'id': np.arange(5), 'words': ['apple;pear;orange', 'apple', 'pear;grape', 'orange', 'orange;pear']})
 print(dfm.words.str.split(';').explode().value_counts())
 ```
+* Convertir columnas en json 
+
+```sh
+import pandas as pd
+from io import StringIO
+
+data = """
+NETWORK_USERID,TALK_STATUS,TALK_STATUS_EXPIRY,CATEGORY,CATEGORY_EXPIRY
+f40daf16-f069-4c1d-ac2a-d1504f0fc147,Talker,15/12/2020,MN_FFBQ,23/12/2019
+4d3e9e50-f88b-4c0b-a700-881474f992ab,Lurker,15/12/2020,MN_FFBQ,23/12/2019
+c2e2fa63-efad-4b7d-b11e-77d9c8692677,Lurker,15/12/2020,MN_FFBQ,23/12/2019
+c46a2af4-0c20-486e-9ae0-6323269f252d,Lurker,15/12/2020,MN_FFBQ,23/12/2019
+f6f88be2-dca6-4129-93ed-2b32a633e1ec,Talker,15/12/2020,MN_FFBQ,23/12/2019
+"""
+df = pd.read_csv(StringIO(data),sep=',')
+
+v = df.values.tolist()
+lst = []
+col1=['value','expiry']
+
+for row in v:
+    lst.append([row[0],'['+str(dict(zip(col1, [row[3],row[4]])))+']'])
+
+df1 = pd.DataFrame(lst,columns=['NETWORK_USERID','CATEGORY'])
+print(df1)
+```
