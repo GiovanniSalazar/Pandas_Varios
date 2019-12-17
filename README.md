@@ -130,3 +130,30 @@ for row in v:
 df1 = pd.DataFrame(lst,columns=['NETWORK_USERID','CATEGORY'])
 print(df1)
 ```
+* Contar palabras de una columna 
+
+```sh
+from collections import Counter
+from io import StringIO
+import pandas as pd
+
+data = """
+Expression,Description
+Sad,"people are sad because they got no money."
+Happy,"people are happy because ..really."
+Sad,"people are miserable because they broke up"
+Happy,"They got good money"
+"""
+#read csv
+df = pd.read_csv(StringIO(data),sep=',')
+#Only select result where Expression = 'Sad'
+dfToList=df[df['Expression']=='Sad']['Description'].tolist()
+# All dict 
+print(dict(Counter(" ".join(dfToList).split(" ")).items()))
+
+words=dict(Counter(" ".join(dfToList).split(" ")).items())
+
+for key in words:
+  # Here your conditions what you want
+  print(key, '->', words[key])
+```
