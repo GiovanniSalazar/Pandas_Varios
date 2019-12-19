@@ -169,3 +169,21 @@ soup = BeautifulSoup(open("table.html"), "lxml")
 df_table = pd.read_html(s)
 df_table = df_table[0]
 ```
+* Realizar un pivot de un dataframe
+
+```sh
+import pandas as pd
+
+columns = ['country','rate','year','source']
+df = pd.DataFrame(columns=columns)
+df.loc[0] = ['US',25.2,2003,'international']
+df.loc[1] = ['US',30,2003,'goverment']
+df.loc[2] = ['US',35,2005,'goverment']
+df.loc[3] = ['China',12.5,2004,'goverment']
+df.loc[4] = ['China',15.6,2004,'international']
+df1=df.groupby(['country', 'year'], as_index=False)['rate'].mean()
+print(df1)
+print('-----')
+df2 = df1.pivot_table(index=['country'], columns='year', values='rate').reset_index().fillna('')
+print(df2)
+```
