@@ -157,3 +157,15 @@ for key in words:
   # Here your conditions what you want
   print(key, '->', words[key])
 ```
+
+* Pandas leer tabla html
+
+```sh
+from bs4 import BeautifulSoup
+import pandas as pd
+import re
+
+soup = BeautifulSoup(open("table.html"), "lxml")
+df_table = pd.read_html(s)
+df_table = df_table[0]
+```
