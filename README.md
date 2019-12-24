@@ -187,3 +187,16 @@ print('-----')
 df2 = df1.pivot_table(index=['country'], columns='year', values='rate').reset_index().fillna('')
 print(df2)
 ```
+* Alinear columnas a files dependiendo del valor
+
+```sh
+import pandas as pd
+
+text = [ ('Accessories','Nope') ,
+             ('Accessories','Everything' ) ,
+             ('Connectivity','kEEP'),
+            ('Connectivity','None') ]
+
+df = pd.DataFrame(text, columns = ['Col1' , 'Col2']) 
+print(pd.pivot_table(df,index=['Col1'],values='Col2',aggfunc=lambda x: ','.join(x)))
+```
